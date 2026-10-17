@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://djxd7re3uj5ud"]
+
+[ext_resource type="Script" uid="uid://dmrylyu8y6n0s" path="res://first_person_controller/first_person_controller.gd" id="1_ja5wc"]
+[ext_resource type="Material" uid="uid://d2csa2eqiuqal" path="res://materials/reticle.material" id="2_irgtj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j0767"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_227sj"]
+
+[node name="FirstPersonController" type="CharacterBody3D" unique_id=319287437]
+script = ExtResource("1_ja5wc")
+mouse_sensitivity = 2.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1688115460]
+shape = SubResource("CapsuleShape3D_j0767")
+
+[node name="CameraPosition" type="Marker3D" parent="." unique_id=59631802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="CameraGimbal" type="Node3D" parent="." unique_id=2129139833]
+editor_description = "This node never rotates and interpolates it's position towards the CameraPosition node."
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="Yaw" type="Node3D" parent="CameraGimbal" unique_id=507398468]
+
+[node name="Pitch" type="Node3D" parent="CameraGimbal/Yaw" unique_id=1361128381]
+
+[node name="Camera" type="Camera3D" parent="CameraGimbal/Yaw/Pitch" unique_id=2021317628]
+current = true
+
+[node name="Reticle" type="ColorRect" parent="CameraGimbal/Yaw/Pitch/Camera" unique_id=1604961267]
+material = ExtResource("2_irgtj")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CameraGimbal/Yaw/Pitch/Camera" unique_id=206438826]
+visible = false
+light_energy = 16.0
+spot_range = 7.3068395
+spot_angle = 37.066956
+
+[node name="Body" type="Node3D" parent="." unique_id=368287032]
+editor_description = "Container node for the first person body mesh. 
+
+The node origin will be interpolated towards the character, but the rotation will always match the camera yaw."
+visible = false
+
+[node name="Capsule" type="MeshInstance3D" parent="Body" unique_id=278140921]
+mesh = SubResource("CapsuleMesh_227sj")
+skeleton = NodePath("../..")

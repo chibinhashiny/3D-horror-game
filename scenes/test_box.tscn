@@ -1,0 +1,202 @@
+[gd_scene format=3 uid="uid://row4qfvsbnar"]
+
+[ext_resource type="PackedScene" uid="uid://djxd7re3uj5ud" path="res://first_person_controller/first_person_controller.tscn" id="1_uecpb"]
+[ext_resource type="Shader" uid="uid://dm736p34f20ue" path="res://shaders/UI_evil_ass_shader_2.gdshader" id="2_gsqoq"]
+[ext_resource type="Shader" uid="uid://c6g5byntqymj0" path="res://shaders/UI_buskhot.gdshader" id="2_raltb"]
+[ext_resource type="Script" uid="uid://d4gltk0qp0foj" path="res://scripts/sign.gd" id="4_jeuno"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uecpb"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_raltb"]
+sky_material = SubResource("ProceduralSkyMaterial_uecpb")
+
+[sub_resource type="Environment" id="Environment_gsqoq"]
+background_mode = 2
+sky = SubResource("Sky_raltb")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jeuno"]
+shader = ExtResource("2_gsqoq")
+shader_parameter/dithering = true
+shader_parameter/dithering_size = 10
+shader_parameter/resolution_scale = 2
+shader_parameter/threshold = 60.0
+shader_parameter/white = Color(1, 1, 1, 1)
+shader_parameter/black = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gsqoq"]
+shader = ExtResource("2_raltb")
+
+[sub_resource type="LabelSettings" id="LabelSettings_gsqoq"]
+font_size = 30
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_raltb"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gsqoq"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gsqoq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gsqoq"]
+size = Vector3(3.5673351, 0.23545837, 1.9940872)
+
+[node name="TestBox" type="Node" unique_id=1215781159]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1201740031]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2036785698]
+environment = SubResource("Environment_gsqoq")
+
+[node name="UI_effects_n_shit" type="Control" parent="." unique_id=926731036]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI_effects_n_shit" unique_id=1757987137]
+material = SubResource("ShaderMaterial_jeuno")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="UI_effects_n_shit/SubViewportContainer" unique_id=1769105262]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="FirstPersonController" parent="UI_effects_n_shit/SubViewportContainer/SubViewport" unique_id=1443667856 instance=ExtResource("1_uecpb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8180275, 0, 0)
+
+[node name="evil_ass_filter ( dont use )" type="ColorRect" parent="UI_effects_n_shit" unique_id=592065596]
+visible = false
+material = SubResource("ShaderMaterial_gsqoq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GUI" type="CanvasLayer" parent="." unique_id=1750226214]
+
+[node name="TXT_read" type="Label" parent="GUI" unique_id=1793479556]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -73.0
+offset_right = 54.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "read?"
+label_settings = SubResource("LabelSettings_gsqoq")
+horizontal_alignment = 1
+
+[node name="CSG_Meshes" type="Node" parent="." unique_id=1759830581]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSG_Meshes" unique_id=918624112]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.041997, -1.5603073, -9.239094)
+material_override = SubResource("StandardMaterial3D_raltb")
+use_collision = true
+size = Vector3(44.76587, 1, 38.39978)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="CSG_Meshes" unique_id=1203595348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.041997, 2.020012, -9.239094)
+visible = false
+material_override = SubResource("StandardMaterial3D_raltb")
+use_collision = true
+size = Vector3(44.76587, 0.19140625, 38.39978)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSG_Meshes" unique_id=1257214113]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22745943, -6.039465)
+use_collision = true
+size = Vector3(1, 2.673706, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSG_Meshes" unique_id=1658397526]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1573195, 0.22745943, -2.8193111)
+use_collision = true
+size = Vector3(1, 2.673706, 1)
+material = SubResource("StandardMaterial3D_gsqoq")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSG_Meshes" unique_id=498207001]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0821395, 0.22745943, 1.4658127)
+use_collision = true
+size = Vector3(44.833344, 2.673706, 1)
+material = SubResource("StandardMaterial3D_gsqoq")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSG_Meshes" unique_id=571990436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.317581, 0.22745943, -7.056404)
+use_collision = true
+size = Vector3(3.090374, 2.673706, 18.044434)
+material = SubResource("StandardMaterial3D_gsqoq")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSG_Meshes" unique_id=1464501061]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.012875, 0.22745943, -9.061012)
+use_collision = true
+size = Vector3(1.4281216, 2.673706, 22.05365)
+material = SubResource("StandardMaterial3D_gsqoq")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSG_Meshes" unique_id=503821121]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.303743, 0.22745943, -17.909939)
+use_collision = true
+size = Vector3(12.846385, 2.673706, 1.2528)
+material = SubResource("StandardMaterial3D_gsqoq")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="CSG_Meshes" unique_id=2120287351]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.423108, 0.22745943, -15.696603)
+use_collision = true
+size = Vector3(1.4201477, 2.673706, 5.679472)
+material = SubResource("StandardMaterial3D_gsqoq")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="CSG_Meshes" unique_id=314324193]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8998432, 0.22745943, -14.41073)
+use_collision = true
+size = Vector3(9.615347, 2.673706, 0.7334056)
+material = SubResource("StandardMaterial3D_gsqoq")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="CSG_Meshes" unique_id=975724405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6925395, 0.22745943, -13.065601)
+use_collision = true
+size = Vector3(1.4200721, 2.673706, 7.6006813)
+material = SubResource("StandardMaterial3D_gsqoq")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSG_Meshes" unique_id=658972544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9434557, 0.22745943, -9.886147)
+use_collision = true
+size = Vector3(31.612448, 2.673706, 1.7044067)
+material = SubResource("StandardMaterial3D_gsqoq")
+
+[node name="sign_placeholder" type="MeshInstance3D" parent="." unique_id=315090243]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.389909, -0.5490105, -1.0906706)
+mesh = SubResource("BoxMesh_gsqoq")
+script = ExtResource("4_jeuno")
+
+[node name="Area3D" type="Area3D" parent="sign_placeholder" unique_id=1428082585]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35873365, -0.025800705, -0.39066553)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="sign_placeholder/Area3D" unique_id=1010403521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.056469917, 0.3029095, 0.28457296)
+shape = SubResource("BoxShape3D_gsqoq")
+
+[connection signal="body_shape_entered" from="sign_placeholder/Area3D" to="sign_placeholder" method="_on_area_3d_body_shape_entered"]
+[connection signal="body_shape_exited" from="sign_placeholder/Area3D" to="sign_placeholder" method="_on_area_3d_body_shape_exited"]
